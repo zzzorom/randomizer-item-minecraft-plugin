@@ -1,0 +1,22 @@
+name: RandomItemPlugin
+version: '${version}'
+main: dev.randomizer.RandomItemPlugin
+api-version: '1.21'
+description: Gives every survival player a random item on a timer.
+commands:
+  start-randomizer:
+    description: Start the randomizer
+    usage: /start-randomizer
+    permission: randomizer.admin
+  stop-randomizer:
+    description: Stop the randomizer
+    usage: /stop-randomizer
+    permission: randomizer.admin
+  randomitem:
+    description: Randomizer settings
+    usage: /randomitem <interval|reload|status>
+    permission: randomizer.admin
+permissions:
+  randomizer.admin:
+    description: Control the randomizer
+    default: op

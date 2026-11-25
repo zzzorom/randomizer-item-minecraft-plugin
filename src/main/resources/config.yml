@@ -1,0 +1,104 @@
+# RandomItemPlugin configuration
+# After editing, run /randomitem reload in-game (or restart the server).
+
+# Seconds between item drops. Can also be changed live: /randomitem interval 30
+interval-seconds: 45
+
+# Sound + action-bar message when an item is received.
+sounds: true
+action-bar: true
+
+# Enchantments never used for enchanted books (anything ending in _curse is skipped too).
+excluded-enchants:
+  - binding_curse
+  - vanishing_curse
+
+# Group copper items so every oxidation stage / waxed version counts as ONE chance
+# (e.g. "cut copper stairs" is one entry, not eight).
+group-copper: true
+
+# Placeholders usable inside group/exclude patterns as {NAME}.
+# If Mojang adds a new wood type or dye color, add it here.
+tokens:
+  COLOR: [WHITE, ORANGE, MAGENTA, LIGHT_BLUE, YELLOW, LIME, PINK, GRAY, LIGHT_GRAY, CYAN, PURPLE, BLUE, BROWN, GREEN, RED, BLACK]
+  WOOD: [OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, DARK_OAK, MANGROVE, CHERRY, PALE_OAK, BAMBOO, CRIMSON, WARPED]
+
+# Items that are never rolled (regular expressions matched against the item's
+# Material name). Everything else, including command blocks, bedrock, spawners,
+# dragon eggs, etc., stays in the pool.
+exclude-materials:
+  - "^WRITTEN_BOOK$"
+  - "^FILLED_MAP$"
+  - "^KNOWLEDGE_BOOK$"
+  # Tool tiers: only wood, iron, diamond, netherite
+  - "^(STONE|GOLDEN|COPPER)_(SWORD|PICKAXE|AXE|SHOVEL)$"
+  # Armor tiers: only leather, gold, iron, netherite
+  - "^(DIAMOND|CHAINMAIL|COPPER)_(HELMET|CHESTPLATE|LEGGINGS|BOOTS)$"
+
+# Groups: every group is ONE chance in the roll. When a group is rolled, one of its
+# items is picked at random. An item belongs to the FIRST group that matches it.
+groups:
+  # ---- colors ----
+  wool: ["^{COLOR}_WOOL$"]
+  carpet: ["^{COLOR}_CARPET$"]
+  bed: ["^{COLOR}_BED$"]
+  banner: ["^{COLOR}_BANNER$"]
+  candle: ["^{COLOR}_CANDLE$", "^CANDLE$"]
+  dye: ["^{COLOR}_DYE$"]
+  concrete: ["^{COLOR}_CONCRETE$"]
+  concrete_powder: ["^{COLOR}_CONCRETE_POWDER$"]
+  glazed_terracotta: ["^{COLOR}_GLAZED_TERRACOTTA$"]
+  terracotta: ["^{COLOR}_TERRACOTTA$", "^TERRACOTTA$"]
+  stained_glass: ["^{COLOR}_STAINED_GLASS$", "^GLASS$"]
+  stained_glass_pane: ["^{COLOR}_STAINED_GLASS_PANE$", "^GLASS_PANE$"]
+  shulker_box: ["^{COLOR}_SHULKER_BOX$", "^SHULKER_BOX$"]
+  harness: ["^{COLOR}_HARNESS$"]
+  # ---- wood types (grouped by item kind) ----
+  planks: ["^{WOOD}_PLANKS$"]
+  log: ["^{WOOD}_(LOG|STEM)$", "^BAMBOO_BLOCK$"]
+  stripped_log: ["^STRIPPED_{WOOD}_(LOG|STEM)$", "^STRIPPED_BAMBOO_BLOCK$"]
+  wood_block: ["^{WOOD}_(WOOD|HYPHAE)$"]
+  stripped_wood_block: ["^STRIPPED_{WOOD}_(WOOD|HYPHAE)$"]
+  door: ["^{WOOD}_DOOR$"]
+  trapdoor: ["^{WOOD}_TRAPDOOR$"]
+  fence: ["^{WOOD}_FENCE$"]
+  fence_gate: ["^{WOOD}_FENCE_GATE$"]
+  sign: ["^{WOOD}_SIGN$"]
+  hanging_sign: ["^{WOOD}_HANGING_SIGN$"]
+  button: ["^{WOOD}_BUTTON$"]
+  pressure_plate: ["^{WOOD}_PRESSURE_PLATE$"]
+  boat: ["^{WOOD}_(BOAT|RAFT)$"]
+  chest_boat: ["^{WOOD}_CHEST_(BOAT|RAFT)$"]
+  sapling: ["^{WOOD}_SAPLING$", "^MANGROVE_PROPAGULE$"]
+  leaves: ["^{WOOD}_LEAVES$", "^(FLOWERING_)?AZALEA_LEAVES$"]
+  # ---- stone families ----
+  stairs: ["_STAIRS$"]
+  slab: ["_SLAB$"]
+  wall: ["_WALL$"]
+  # ---- collectibles ----
+  music_disc: ["^MUSIC_DISC_"]
+  pottery_sherd: ["_POTTERY_SHERD$"]
+  armor_trim_template: ["_ARMOR_TRIM_SMITHING_TEMPLATE$"]
+  banner_pattern: ["_BANNER_PATTERN$"]
+  coral: ["^(DEAD_)?(TUBE|BRAIN|BUBBLE|FIRE|HORN)_CORAL$"]
+  coral_block: ["^(DEAD_)?(TUBE|BRAIN|BUBBLE|FIRE|HORN)_CORAL_BLOCK$"]
+  coral_fan: ["^(DEAD_)?(TUBE|BRAIN|BUBBLE|FIRE|HORN)_CORAL_FAN$"]
+  head: ["^(SKELETON_SKULL|WITHER_SKELETON_SKULL|[A-Z_]+_HEAD)$"]
+
+# Odds multipliers. 1.0 = normal. Matching items count as "rare" (special sound).
+weights:
+  - pattern: "^NETHERITE_(SWORD|PICKAXE|AXE|SHOVEL|HOE|HELMET|CHESTPLATE|LEGGINGS|BOOTS)$"
+    multiplier: 0.25
+
+# Netherite tools/armor come pre-enchanted with these (no conflicting enchantments).
+# Key = last word of the item name (SWORD, PICKAXE, ...). Values are enchant levels.
+netherite-presets:
+  sword: {sharpness: 5, unbreaking: 3, mending: 1, looting: 3, fire_aspect: 2, sweeping_edge: 3}
+  pickaxe: {efficiency: 5, unbreaking: 3, mending: 1, fortune: 3}
+  axe: {sharpness: 5, efficiency: 5, unbreaking: 3, mending: 1}
+  shovel: {efficiency: 5, unbreaking: 3, mending: 1}
+  hoe: {efficiency: 5, unbreaking: 3, mending: 1, fortune: 3}
+  helmet: {protection: 4, unbreaking: 3, mending: 1, respiration: 3, aqua_affinity: 1}
+  chestplate: {protection: 4, unbreaking: 3, mending: 1}
+  leggings: {protection: 4, unbreaking: 3, mending: 1, swift_sneak: 3}
+  boots: {protection: 4, unbreaking: 3, mending: 1, feather_falling: 4, depth_strider: 3, soul_speed: 3}
